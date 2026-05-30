@@ -445,22 +445,23 @@ async def run_attack(update: Update, ctx: ContextTypes.DEFAULT_TYPE, uid: int, i
                 reply_markup=get_support_keyboard()
             )
             
-            # Live countdown loop
-            for remaining in range(actual_duration, -1, -1):
+            # Live countdown loop - updates every 10 seconds
+            update_interval = 10
+            for remaining in range(actual_duration, -1, -update_interval):
                 if remaining <= 0:
                     break
-                
+
                 elapsed = actual_duration - remaining
                 pct = int((elapsed / actual_duration) * 100)
                 if pct > 100: pct = 100
-                
+
                 filled = int(pct / 5)
                 bar = "█" * filled + "░" * (20 - filled)
-                
+
                 minutes = remaining // 60
                 seconds = remaining % 60
                 time_display = f"{minutes}m {seconds}s" if minutes > 0 else f"{seconds}s"
-                
+
                 try:
                     await msg.edit_text(
                         f"⚡ *ATTACK IN PROGRESS* ⚡\n\n"
@@ -478,9 +479,9 @@ async def run_attack(update: Update, ctx: ContextTypes.DEFAULT_TYPE, uid: int, i
                     if "not modified" not in str(e).lower():
                         logger.error(f"Edit error: {e}")
                         break
-                
-                await asyncio.sleep(1)
-                
+
+                await asyncio.sleep(update_interval)
+
                 if uid not in active_attacks:
                     logger.info(f"Attack {attack_id} was manually stopped")
                     break
