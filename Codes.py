@@ -18,7 +18,7 @@ load_dotenv()
 BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
 MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
-API_URL          = os.getenv("API_URL", "https://kimatress.st")
+API_URL = os.getenv("API_URL", "https://kimstress.st")
 API_KEY          = os.getenv("API_KEY", "0dd36f49b2944c9568f4384cce7027443023e09312c6dc5da606a33f16bba5d0")
 ADMIN_IDS        = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "7340399575").split(",") if x.strip()]
 CHANNEL_ID       = os.getenv("CHANNEL_ID", "-1002558937048")
