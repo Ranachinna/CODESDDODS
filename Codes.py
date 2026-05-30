@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 BOT_TOKEN        = os.getenv("8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
-MONGODB_URI      = os.getenv("mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", "")
+MONGODB_URI      = os.getenv("mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?appName=Cluster0", "")
 DATABASE_NAME    = os.getenv("rockybot", "attack_bot")
 API_URL          = os.getenv("https://kimatress.st")
 API_KEY          = os.getenv("0dd36f49b2944c9568f4384cce7027443023e09312c6dc5da606a33f16bba5d0")
