@@ -362,6 +362,13 @@ def launch_api(ip, port, dur):
             headers={"x-api-key": API_KEY, "Content-Type": "application/json"},
             timeout=300
         )
+        if r.status_code != 200:
+            return {"success": False, "error": f"HTTP {r.status_code}: {r.text}"}
+        if not r.text:
+            return {"success": False, "error": "Empty response from API"}
+        return r.json()
+    except Exception as e:
+        return {"success": False, "error": str(e)}
         return r.json()
     except Exception as e:
         return {"success": False, "error": str(e)}
