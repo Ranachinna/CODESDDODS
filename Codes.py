@@ -1038,7 +1038,7 @@ async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     db.upsert_user(uid, uname, fname)
     
     welcome_text = (
-        f"🌟 *WELCOME TO PRIMELEAKS ATTACK BOT* 🌟\n\n"
+        f"🌟 *WELCOME TO CODES ATTACK BOT* 🌟\n\n"
         f"🔥 *Premium DDoS Protection Testing*\n"
         f"⚡ *High Performance Attack Simulation*\n"
         f"🛡️ *Professional Security Tool*\n\n"
