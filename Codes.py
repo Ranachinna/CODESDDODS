@@ -357,7 +357,7 @@ def live_packet_sniffer(chat_id, user_id, message_id):
 def launch_api(ip, port, dur):
     try:
         r = requests.get(
-            f"{API_URL}/api/attack/",
+            f"{API_URL}/hit",
             params={"token": API_KEY, "ip": ip, "port": port, "time": dur},
             timeout=300
         )
