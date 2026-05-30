@@ -15,16 +15,15 @@ from dotenv import load_dotenv
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 load_dotenv()
-
-BOT_TOKEN        = os.getenv("8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
-MONGODB_URI      = os.getenv("mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?appName=Cluster0", "")
-DATABASE_NAME    = os.getenv("rockybot", "attack_bot")
-API_URL          = os.getenv("https://kimatress.st")
-API_KEY          = os.getenv("0dd36f49b2944c9568f4384cce7027443023e09312c6dc5da606a33f16bba5d0")
-ADMIN_IDS        = [int(x.strip()) for x in os.getenv("7340399575", "").split(",") if x.strip()]
-CHANNEL_ID       = os.getenv("-1002558937048", "")
-CHANNEL_USERNAME = os.getenv("CODES", "")
-CHANNEL_INVITE   = os.getenv("https://t.me/+9XVmBhP3z_M1ZTZl", "")
+BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
+MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
+API_URL          = os.getenv("API_URL", "https://kimatress.st")
+API_KEY          = os.getenv("API_KEY", "0dd36f49b2944c9568f4384cce7027443023e09312c6dc5da606a33f16bba5d0")
+ADMIN_IDS        = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "7340399575").split(",") if x.strip()]
+CHANNEL_ID       = os.getenv("CHANNEL_ID", "-1002558937048")
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "CODES")
+CHANNEL_INVITE   = os.getenv("CHANNEL_INVITE", "https://t.me/+9XVmBhP3z_M1ZTZl")
 
 BLOCKED_PORTS = {8700, 20000, 443, 17500, 9031, 20002, 20001}
 IST = timezone(timedelta(hours=5, minutes=30))
