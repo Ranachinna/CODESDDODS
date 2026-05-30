@@ -374,13 +374,11 @@ def admin_only(fn):
             return
         return await fn(update, ctx, *a, **kw)
     return wrapper
-
 async def check_joined(uid, ctx):
     if not CHANNEL_ID: return True
     try:
         m = await ctx.bot.get_chat_member(chat_id=int(CHANNEL_ID), user_id=uid)
         joined = m.status in ("member", "administrator", "creator")
-        db.set_channel_status(uid, joined)
         return joined
     except Exception as e:
         logger.error(f"Channel check: {e}")
