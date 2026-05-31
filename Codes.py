@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 load_dotenv()
-BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAGZFePhGS21K2eoeZr_FI8YnduKNTx3PyU")
+BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAH-4N6HxQNhiaQQhu9QxkziHhlFJ9WOy6Q")
 MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
 API_URL          = os.getenv("API_URL", "http://203.57.85.87:8080")
