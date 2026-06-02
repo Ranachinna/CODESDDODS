@@ -18,7 +18,7 @@ load_dotenv()
 BOT_TOKEN        = os.getenv("BOT_TOKEN", "8796126950:AAH-4N6HxQNhiaQQhu9QxkziHhlFJ9WOy6Q")
 MONGODB_URI      = os.getenv("MONGODB_URI", "mongodb+srv://rocky:rocky8688@cluster0.hzpkek4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME    = os.getenv("DATABASE_NAME", "rockybot")
-API_URL          = os.getenv("API_URL""http://drxpowerweb.trushme.xyz/api/attack/")
+API_URL          = os.getenv("API_URL", "http://drxpowerweb.trushme.xyz/api/attack/")
 API_KEY          = os.getenv("API_KEY", "nx_api_ZNp21i6cp1L2Cw")
 ADMIN_IDS        = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "7340399575").split(",") if x.strip()]
 CHANNEL_ID       = os.getenv("CHANNEL_ID", "-1002558937048")
@@ -241,7 +241,6 @@ class DB:
         return user.get("redeemed_keys", []) if user else []
 
 # ============ LIVE BGMI PACKET SNIFFER ============
-
 def live_packet_sniffer(chat_id, user_id, message_id):
     """Main packet sniffer function"""
     
